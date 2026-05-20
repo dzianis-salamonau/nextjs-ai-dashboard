@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# nextjs-ai-dashboard
 
-## Getting Started
+Modern SaaS frontend built with **Next.js**, **React**, and **shadcn/ui** — designed as a polished portfolio piece for your GitHub profile.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)
+![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript)
+![Tailwind](https://img.shields.io/badge/Tailwind-v4-38B2AC?style=flat-square&logo=tailwind-css)
+
+## Features
+
+- **Authentication** — Auth.js credentials flow with protected dashboard routes
+- **Analytics dashboard** — KPI cards, revenue chart (Recharts), activity feed
+- **AI chat UI** — Streaming responses via Vercel AI SDK
+- **Demo mode** — Works without an API key; add `OPENAI_API_KEY` for live GPT
+- **File upload** — Drag-and-drop with validation and server storage
+- **Markdown rendering** — GFM + syntax highlighting in chat responses
+- **Dark / light theme** — next-themes with shadcn design tokens
+
+## Quick start
 
 ```bash
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Demo login
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Email | Password |
+|-------|----------|
+| `demo@example.com` | `demo123` |
 
-## Learn More
+### Environment variables
 
-To learn more about Next.js, take a look at the following resources:
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `AUTH_SECRET` | Yes | Random string for session signing (`openssl rand -base64 32`) |
+| `OPENAI_API_KEY` | No | Enables live OpenAI streaming in chat |
+| `NEXTAUTH_URL` | Prod | App URL, e.g. `https://your-app.vercel.app` |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/
+│   ├── api/          # Auth, chat streaming, file upload
+│   ├── dashboard/    # Protected app routes
+│   ├── login/
+│   └── page.tsx      # Marketing landing
+├── components/
+│   ├── ui/           # shadcn/ui primitives
+│   ├── chat/
+│   ├── dashboard/
+│   └── files/
+├── lib/              # Utils, demo data, upload store
+└── auth.ts           # Auth.js config
+```
 
-## Deploy on Vercel
+## Tech stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [Next.js 16](https://nextjs.org/) (App Router)
+- [React 19](https://react.dev/)
+- [shadcn/ui](https://ui.shadcn.com/) + [Tailwind CSS v4](https://tailwindcss.com/)
+- [Auth.js](https://authjs.dev/) (NextAuth v5)
+- [Vercel AI SDK](https://sdk.vercel.ai/)
+- [Recharts](https://recharts.org/)
+- [react-markdown](https://github.com/remarkjs/react-markdown)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deploy
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/YOUR_USERNAME/nextjs-ai-dashboard)
+
+Set `AUTH_SECRET` in your deployment environment. Optionally add `OPENAI_API_KEY`.
+
+## License
+
+MIT
